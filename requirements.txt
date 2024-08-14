@@ -1,0 +1,7 @@
+torch
+transformers
+sentencepiece
+protobuf
+numpy==1.24.1 
+protobuf
+streamlit 
