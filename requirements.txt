@@ -5,3 +5,10 @@ protobuf
 numpy==1.24.1 
 protobuf
 streamlit 
+PyPDF2
+python-docx==0.8.6
+fastapi
+python-multipart
+pydub
+ffmpeg-python
+torchaudio
