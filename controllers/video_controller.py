@@ -14,6 +14,8 @@ class VideoController:
             transcription, translation = self.translator.transcribe_and_translate_video(
                 video_path, self.ffmpeg_path, src_lang, tgt_lang
             )
+            transcription = clean_output(transcription)
+            translation = clean_output(translation)
             return {
                 "status": "success",
                 "transcription": transcription,
