@@ -11,6 +11,8 @@ class PDFController:
                 return {"status": "error", "message": "PDF file not found"}
             
             translated_text = self.translator.translate_pdf(pdf_path, src_lang, tgt_lang)
+            translated_text=clean_output(translated_text)
+
             return {"status": "success", "translated_text": translated_text}
         except Exception as e:
             return {"status": "error", "message": str(e)}
