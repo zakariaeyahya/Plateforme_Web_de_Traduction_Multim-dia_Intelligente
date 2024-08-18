@@ -30,14 +30,20 @@ async def translate_text(input_text: str = Form(...), input_lang: str = Form(...
         raise HTTPException(status_code=500, detail=result["message"])
 
 @app.post("/translate_pdf/")
-async def translate_pdf(input_lang: str = Form(...), output_lang: str = Form(...), file: UploadFile = File(...)):
+async def translate_pdf(
+    input_lang: str = Form(...),
+    output_lang: str = Form(...),
+    start_paragraph: int = Form(None),
+    end_paragraph: int = Form(None),
+    file: UploadFile = File(...)
+):
     logger.info(f"Demande de traduction de PDF reçue: {input_lang} -> {output_lang}")
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
         temp_pdf.write(await file.read())
         temp_pdf_path = temp_pdf.name
     
     try:
-        result = pdf_controller.translate_pdf(temp_pdf_path, input_lang, output_lang)
+        result = pdf_controller.translate_pdf(temp_pdf_path, input_lang, output_lang, start_paragraph, end_paragraph)
         if result["status"] == "success":
             return JSONResponse(content=result, status_code=200)
         else:
@@ -68,6 +74,8 @@ async def process_audio(
     input_lang: str = Form(...),
     output_lang: str = Form(...),
     audio_type: str = Form(...),
+    start_second: int = Form(None),
+    end_second: int = Form(None),
     file: UploadFile = File(...)
 ):
     logger.info(f"Demande de traitement audio reçue: {input_lang} -> {output_lang}, Type: {audio_type}")
@@ -75,30 +83,19 @@ async def process_audio(
         raise HTTPException(status_code=400, detail="Type audio non supporté. Utilisez 'mp3', 'opus', ou 'wav'.")
     
     file_extension = '.' + audio_type
-    temp_files = []
-
     with tempfile.NamedTemporaryFile(delete=False, suffix=file_extension) as temp_audio:
         temp_audio.write(await file.read())
         temp_audio_path = temp_audio.name
-        temp_files.append(temp_audio_path)
     
     output_csv = tempfile.NamedTemporaryFile(delete=False, suffix=".csv").name
-    temp_files.append(output_csv)
     
     try:
-        result = audio_controller.process_audio(temp_audio_path, input_lang, output_lang, output_csv, audio_type)
+        result = audio_controller.process_audio(temp_audio_path, input_lang, output_lang, output_csv, audio_type, start_second, end_second)
         if result["status"] == "success":
             return JSONResponse(content=result, status_code=200)
         else:
             raise HTTPException(status_code=500, detail=result["message"])
     finally:
-        for temp_file in temp_files:
-            if os.path.exists(temp_file):
-                os.remove(temp_file)
-        logger.info(f"Fichiers temporaires supprimés")
-    
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+        os.remove(temp_audio_path)
+        os.remove(output_csv)
+        logger.info(f"Fichiers temporaires supprimés: {temp_audio_path}, {output_csv}")
