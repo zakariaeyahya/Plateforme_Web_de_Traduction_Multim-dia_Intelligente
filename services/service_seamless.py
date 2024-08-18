@@ -11,6 +11,10 @@ from .service_functions.transcribe_and_translate_video import transcribe_and_tra
 from .service_functions.process_audio import process_audio
 from .service_functions.convert_opus_to_wav import convert_opus_to_wav
 from .service_functions.convert_mp3_to_wav import convert_mp3_to_wav
+from .service_functions.convert_mp4_to_wav import convert_mp4_to_wav
+import subprocess
+import os
+import tempfile
 import os
 import csv
 import librosa
@@ -68,14 +72,41 @@ class SeamlessTranslator:
         self._load_model()
         logger.info(f"Traduction de PDF : {src_lang} -> {tgt_lang}")
         return translate_pdf(pdf_path, src_lang, tgt_lang, self.translate_text)
+    def convert_mp4_to_wav(self, mp4_file_path, ffmpeg_path):
+        wav_file_path = os.path.splitext(mp4_file_path)[0] + '.wav'
+        try:
+            subprocess.run([
+                ffmpeg_path,
+                '-i', mp4_file_path,
+                '-acodec', 'pcm_s16le',
+                '-ar', '16000',
+                '-ac', '1',
+                wav_file_path
+            ], check=True, stderr=subprocess.PIPE)
+            return wav_file_path
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed to convert {mp4_file_path} to WAV: {e}")
+            logger.error(f"FFmpeg stderr: {e.stderr.decode()}")
+            return None
+        
 
-    def transcribe_and_translate_video(self, video_path, ffmpeg_path, src_lang, tgt_lang):
+    def transcribe_and_translate_video(self, wav_file_path, ffmpeg_path, src_lang, tgt_lang, start_second=None, end_second=None):
         self._load_model()
         logger.info(f"Transcription et traduction de vidéo : {src_lang} -> {tgt_lang}")
-        return transcribe_and_translate_video(
-            video_path, ffmpeg_path, src_lang, tgt_lang,
-            self.speech_to_text, self.translate_text
-        )
+        
+        # Charger l'audio
+        audio, sr = librosa.load(wav_file_path, sr=None)
+        
+        # Couper l'audio si nécessaire
+        if start_second is not None and end_second is not None:
+            start_sample = int(start_second * sr)
+            end_sample = int(end_second * sr)
+            audio = audio[start_sample:end_sample]
+        
+        transcription = self.speech_to_text(audio, src_lang)
+        translation = self.translate_text(transcription, src_lang, tgt_lang)
+        
+        return transcription, translation
 
     def process_audio(self, audio_path, ffmpeg_path, src_lang, tgt_lang, output_csv, audio_type, start_second=None, end_second=None):
         self._load_model()
