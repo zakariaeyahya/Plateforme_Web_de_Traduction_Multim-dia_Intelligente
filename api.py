@@ -7,6 +7,9 @@ from controllers.text_controller import TextController
 from controllers.pdf_controller import PDFController
 from controllers.video_controller import VideoController
 from controllers.audio_controller import AudioController
+from controllers.text_file_controller import TextFileController
+
+# Initialisation des contrôleurs
 
 app = FastAPI()
 
@@ -17,6 +20,7 @@ logger = logging.getLogger(__name__)
 # Initialisation des contrôleurs
 text_controller = TextController()
 pdf_controller = PDFController()
+text_file_controller = TextFileController()
 video_controller = VideoController(ffmpeg_path="chemin/vers/ffmpeg")
 audio_controller = AudioController(ffmpeg_path="chemin/vers/ffmpeg")
 
@@ -53,14 +57,20 @@ async def translate_pdf(
         logger.info(f"Fichier PDF temporaire supprimé: {temp_pdf_path}")
 
 @app.post("/translate_video/")
-async def translate_video(input_lang: str = Form(...), output_lang: str = Form(...), file: UploadFile = File(...)):
+async def translate_video(
+    input_lang: str = Form(...),
+    output_lang: str = Form(...),
+    start_second: int = Form(None),
+    end_second: int = Form(None),
+    file: UploadFile = File(...)
+):
     logger.info(f"Demande de traduction de vidéo reçue: {input_lang} -> {output_lang}")
     with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as temp_video:
         temp_video.write(await file.read())
         temp_video_path = temp_video.name
     
     try:
-        result = video_controller.transcribe_and_translate_video(temp_video_path, input_lang, output_lang)
+        result = video_controller.transcribe_and_translate_video(temp_video_path, input_lang, output_lang, start_second, end_second)
         if result["status"] == "success":
             return JSONResponse(content=result, status_code=200)
         else:
@@ -99,3 +109,28 @@ async def process_audio(
         os.remove(temp_audio_path)
         os.remove(output_csv)
         logger.info(f"Fichiers temporaires supprimés: {temp_audio_path}, {output_csv}")
+
+
+
+@app.post("/translate_text_file/")
+async def translate_text_file(
+    input_lang: str = Form(...),
+    output_lang: str = Form(...),
+    start_line: int = Form(None),
+    end_line: int = Form(None),
+    file: UploadFile = File(...)
+):
+    logger.info(f"Demande de traduction de fichier texte reçue: {input_lang} -> {output_lang}")
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".txt") as temp_txt:
+        temp_txt.write(await file.read())
+        temp_txt_path = temp_txt.name
+    
+    try:
+        result = text_file_controller.translate_text_file(temp_txt_path, input_lang, output_lang, start_line, end_line)
+        if result["status"] == "success":
+            return JSONResponse(content=result, status_code=200)
+        else:
+            raise HTTPException(status_code=500, detail=result["message"])
+    finally:
+        os.remove(temp_txt_path)
+        logger.info(f"Fichier texte temporaire supprimé: {temp_txt_path}")
