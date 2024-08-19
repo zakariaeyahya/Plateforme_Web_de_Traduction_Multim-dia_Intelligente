@@ -30,11 +30,12 @@ Le Traducteur Multimédia est une application révolutionnaire conçue pour tran
 
 ## 🛠️ Technologies de pointe
 
-- Python 3.8+
-- FastAPI pour des performances API optimales
-- Streamlit pour une interface utilisateur réactive et moderne
-- PyTorch et Transformers (Hugging Face) pour un traitement du langage naturel de pointe
-- FFmpeg pour un traitement multimédia robuste
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFB02E?style=for-the-badge&logo=huggingface&logoColor=white)
+![FFmpeg](https://img.shields.io/badge/FFmpeg-%23007ACC.svg?style=for-the-badge&logo=ffmpeg&logoColor=white)
 
 ## 🚀 Mise en route rapide
 
@@ -93,13 +94,6 @@ Lien du projet : [https://github.com/votre-nom-utilisateur/traducteur-multimedia
 ## 🙏 Remerciements
 
 Un grand merci à la communauté open-source et aux créateurs des technologies qui rendent ce projet possible :
-
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
-![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFB02E?style=for-the-badge&logo=huggingface&logoColor=white)
-![FFmpeg](https://img.shields.io/badge/FFmpeg-%23007ACC.svg?style=for-the-badge&logo=ffmpeg&logoColor=white)
 
 ---
 
