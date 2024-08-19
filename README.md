@@ -36,8 +36,57 @@ Le Traducteur Multimédia est une application révolutionnaire conçue pour tran
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
 ![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFB02E?style=for-the-badge&logo=huggingface&logoColor=white)
 ![FFmpeg](https://img.shields.io/badge/FFmpeg-%23007ACC.svg?style=for-the-badge&logo=ffmpeg&logoColor=white)
+## 🏗️ Architecture des fonctionnalités
+Notre traducteur multimédia utilise des processus spécialisés pour chaque type de contenu, assurant une traduction précise et contextuelle. Voici un aperçu de l'architecture de chaque fonctionnalité principale :
+### 1. Traduction de texte
+Le processus de traduction de texte implique plusieurs étapes de prétraitement avant la traduction proprement dite, garantissant une haute qualité de traduction, en particulier pour le darija.
+![1](https://github.com/user-attachments/assets/1e3ad770-7b93-40d8-b234-90c5d1d77081)
+1. Le texte brut est d'abord analysé pour la détection de langue.
+2. Le prétraitement inclut la suppression des caractères spéciaux, la correction orthographique, la tokenisation et la lemmatisation.
+3. Le texte prétraité est ensuite traduit.
+4.  Un post-traitement peut être appliqué avant de produire le texte final traduit.
+
+### 2. Traduction de PDF
+La traduction de documents PDF nécessite des étapes supplémentaires pour gérer la structure et la mise en page du document.
+![2](https://github.com/user-attachments/assets/27391e39-ef4c-4dd7-b1bd-fa04d865182c)
+1. Le texte est extrait du fichier PDF.
+2. La langue du document est détectée.
+3. Le texte subit un prétraitement, incluant la segmentation en paragraphes et la normalisation.
+4. Le texte prétraité est traduit.
+5. Le PDF est reconstitué avec le texte traduit, préservant la mise en page originale.
+
+### 3. Traduction de vidéo
+Le processus de traduction vidéo combine traitement audio et visuel pour une expérience de traduction complète.
+![3](https://github.com/user-attachments/assets/d3de8040-610f-4d64-83f6-0040df795b57)
+
+1. L'audio est extrait de la vidéo et transcrit.
+2. La langue est détectée à partir de la transcription.
+3. Le texte transcrit est prétraité et normalisé.
+4. La traduction est effectuée sur le texte préparé.
+5. Les sous-titres traduits sont synchronisés avec la vidéo originale.
+
+### Traduction audio
+La traduction audio implique la conversion de la parole en texte, suivie d'une traduction et potentiellement d'une reconversion en audio.
+![4](https://github.com/user-attachments/assets/a744b5a7-30c6-4a58-b345-41f520689ab1)
+1. Le fichier audio est transcrit en texte.
+2. La langue source est détectée.
+3. Le texte transcrit est prétraité, incluant la segmentation en phrases et la normalisation.
+4. La traduction est effectuée sur le texte préparé.
+5.  Le texte traduit peut être converti en audio via la synthèse vocale (optionnel).
+
+### Traduction de fichiers texte
+La traduction de fichiers texte prend en compte la structure du document pour préserver la mise en forme.
+![5](https://github.com/user-attachments/assets/b877b122-db66-467f-b94c-03ae0ca22fdc)
+1. Le contenu du fichier texte est extrait.
+2. La langue du document est détectée.
+3. Le texte est prétraité, avec une attention particulière à la segmentation en paragraphes et à l'identification des en-têtes/pieds de page.
+4. Le texte préparé est traduit.
+5. Le fichier texte traduit est reconstitué en préservant la structure originale.
+
+Ces architectures illustrent notre approche approfondie de la traduction, en tenant compte des spécificités de chaque type de média pour assurer des résultats de haute qualité, particulièrement adaptés aux nuances du darija marocain.
 
 ## 🚀 Mise en route rapide
+
 
 1. Clonez le dépôt :
    ```
