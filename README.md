@@ -142,7 +142,7 @@ Lien du projet : [https://github.com/votre-nom-utilisateur/traducteur-multimedia
 
 ## 🙏 Remerciements
 
-Un grand merci à la communauté open-source et aux créateurs des technologies qui rendent ce projet possible :
+Un grand merci à la communauté open-source et aux créateurs des technologies qui rendent ce projet possible 
 
 ---
 
