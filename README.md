@@ -142,7 +142,7 @@ Ce projet est distribué sous la licence MIT. Consultez le fichier `LICENSE` pou
 
 Yahya Zakariae - zakariae.yh@gmail.com
 
-Lien du projet : [https://github.com/votre-nom-utilisateur/traducteur-multimedia](https://github.com/zakariaeyahya/Plateforme_Web_de_Traduction_Multim-dia_Intelligente.git)
+Lien du projet : [🌍 Traducteur Multimédia Spécialisé en Darija 🇲🇦](https://github.com/zakariaeyahya/Plateforme_Web_de_Traduction_Multim-dia_Intelligente.git)
 
 ## 🙏 Remerciements
 
