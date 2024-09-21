@@ -129,7 +129,11 @@ Nous accueillons chaleureusement les contributions ! Pour participer :
 3. Committez vos changements (`git commit -m 'Add AmazingFeature'`)
 4. Poussez vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrez une Pull Request
+## Démonstration
 
+Pour voir l'application en action, consultez notre vidéo de démonstration :
+
+🎥 [Regarder la démo sur YouTube](https://youtu.be/gAaMFbuXZP4?si=xaCsyITjToyP41EzJ)
 ## 📜 Licence
 
 Ce projet est distribué sous la licence MIT. Consultez le fichier `LICENSE` pour plus de détails.
