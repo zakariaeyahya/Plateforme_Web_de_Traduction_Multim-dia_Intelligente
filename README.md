@@ -1,6 +1,17 @@
 # 🌍 Traducteur Multimédia Spécialisé en Darija 🇲🇦
 ![aWISQ6jhonuvK8tlA-dHq_6d3beed313d74288a8d27334dfc8f6fc](https://github.com/user-attachments/assets/904c0bb5-3c12-466e-b05d-2396250aa750)
 
+<p>
+  <a href="https://www.youtube.com/watch?v=gAaMFbuXZP4&t=289s">
+    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+  </a>
+  <a href="https://github.com/zakariaeyahya/Plateforme_Web_de_Traduction_Multim-dia_Intelligente">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="https://www.linkedin.com/in/zakariae-yahya/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</p>
 ## 🌟 À propos du projet
 
 Le Traducteur Multimédia est une application révolutionnaire conçue pour transcender les barrières linguistiques entre le darija marocain et les langues du monde. Notre mission est de catalyser la communication interculturelle, favoriser la compréhension mutuelle et enrichir les échanges en rendant le darija accessible globalement tout en ouvrant le Maroc à la diversité linguistique internationale.
